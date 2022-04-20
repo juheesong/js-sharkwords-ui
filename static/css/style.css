@@ -64,7 +64,3 @@ button {
 button[disabled='true'] {
   cursor: default;
 }
-
-/* #word-container {
-  border: 2px solid red;
-} */
