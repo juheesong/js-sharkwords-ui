@@ -20,44 +20,45 @@ const numWrong = 0;
 // Loop over the chars in `word` and create divs.
 // The divs should be appended to the section with id="word-container".
 const createDivsForChars = (word) => {
-  // Replace this with your code
-  const charDivs = document.querySelector('#word-container') // assigns the word-container section as charDivs
-  for (const char in word) {  // loop over every character in the word 
-    charDivs.insertAdjacentHTML('beforeend',`<div class="letter-box ${char}"></div>`); // at every loop, add a letter-box to charDivs (in word-container)
-  }
+  const wordContainer = document.getElementById('word-container')
+  for (const ch of word) {
+    wordContainer.insertAdjacentHTML('beforeend', `<div class="letter-box ${ch}"></div>`)    
+  }  
 };
 
 // Loop over each letter in the alphabet and generate a button for each letter
 // The buttons should be appended to the section with id="letter-buttons"
 const generateLetterButtons = () => {
-  // Replace this with your code
-  const letterButtons = document.querySelector('#letter-buttons') // assigns letter-button section as letterButtons 
-  for (const letter in ALPHABET) { // loop over every letter in ALPHABET 
-    letterButtons.insertAdjacentHTML('beforeend', `<button> ${letter} </button>`); // at every letter loop, add a button 
+  const letterButtons = document.getElementById('letter-buttons') 
+  for (const letter of ALPHABET) {
+    // console.log(letter)
+    letterButtons.insertAdjacentHTML('beforeend', `<button>${letter}</button>`)    
   }
 };
 
 // Set the `disabled` property of `buttonEl` to `true.
 //
 // `buttonEl` is an `HTMLElement` object.
-//
-const disableLetterButton = (buttonEl) => {
-  // Replace this with your code
-  buttonEl.disabled = true; 
+// const disableLetterButton = (buttonEl) => {
+//   const abutton = document.querySelector() 
+
+const disableLetterButton = (evt) => {
+  // Disable the button
+  // You can disable an element by setting the "disabled" attribute to true
+  evt.target.disabled = true;   
 };
 
 // This is a helper function we will use in the future
 // It should return `true` if `letter` is in the word
 // For now, you should test it out to make sure it works
 
-// const isLetterInWord = (letter) => {
-//   // Replace this with your code
-  
-// };
-
-// this is from the solution... how would i have ever known this lol 
-const isLetterInWord = (letter) => document.querySelector(`div.${letter}`) !== null;
-
+const isLetterInWord = (letter) => {
+  // return word.includes(letter)
+  // const letterDiv = document.querySelector(`.${letter}`)
+  const letterDiv = document.querySelectorAll(`.${letter}`)
+  // return letterDiv !== null
+  return letterDiv.length > 0
+};
 
 
 // This is like if __name__ == '__main__' in Python
@@ -68,8 +69,16 @@ const isLetterInWord = (letter) => document.querySelector(`div.${letter}`) !== n
   // You can change this to choose a random word from WORDS once you
   // finish this lab but we hard code it so we know what the word is
   // and can tell if things look correct for this word
-  const word = 'hello';
 
+  const word = 'hello';
+  createDivsForChars(word);
+  generateLetterButtons();
+
+  const allButtons = document.querySelectorAll('button')
+  for (const button of allButtons) {
+    button.addEventListener('click', disableLetterButton)
+  }
+  
   // call the function that makes an empty line for each letter in the word
   // Replace this line with the function call
   createDivsForChars(word); 
