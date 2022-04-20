@@ -28,29 +28,37 @@ const createDivsForChars = (word) => {
   // const divContainer = document.createElement("div");  
   // newDiv.classList.add('word-container')  
   const wordContainer = document.getElementById('word-container')
-  console.log(wordContainer)
+  // console.log(wordContainer)
   for (const ch of word) {
-    console.log(`<div class="letter-box ${ch}"></div>`)
+    // console.log(`<div class="letter-box ${ch}"></div>`)
     wordContainer.insertAdjacentHTML('beforeend', `<div class="letter-box ${ch}"></div>`)    
   }
   
-
-
 };
 
 // Loop over each letter in the alphabet and generate a button for each letter
 // The buttons should be appended to the section with id="letter-buttons"
 const generateLetterButtons = () => {
   // Replace this with your code
-  // newDiv.innerText = '<p>H</p>'
+  const letterButtons = document.getElementById('letter-buttons') 
+  for (const letter of ALPHABET) {
+    // console.log(letter)
+    letterButtons.insertAdjacentHTML('beforeend', `<button>${letter}</button>`)    
+  }
+  
 };
 
 // Set the `disabled` property of `buttonEl` to `true.
 //
 // `buttonEl` is an `HTMLElement` object.
-//
-const disableLetterButton = (buttonEl) => {
-  // Replace this with your code
+// //
+// const disableLetterButton = (buttonEl) => {
+//   const abutton = document.querySelector() 
+
+const disableLetterButton = (evt) => {
+  // Disable the button
+  // You can disable an element by setting the "disabled" attribute to true
+  evt.target.disabled = true;   
 };
 
 // This is a helper function we will use in the future
@@ -58,7 +66,11 @@ const disableLetterButton = (buttonEl) => {
 // For now, you should test it out to make sure it works
 
 const isLetterInWord = (letter) => {
-  // Replace this with your code
+  // return word.includes(letter)
+  // const letterDiv = document.querySelector(`.${letter}`)
+  const letterDiv = document.querySelectorAll(`.${letter}`)
+  // return letterDiv !== null
+  return letterDiv.length > 0
 };
 
 // This is like if __name__ == '__main__' in Python
@@ -71,6 +83,15 @@ const isLetterInWord = (letter) => {
   // and can tell if things look correct for this word
   const word = 'hello';
   createDivsForChars(word);
+  generateLetterButtons();
+
+  const allButtons = document.querySelectorAll('button')
+  for (const button of allButtons) {
+    button.addEventListener('click', disableLetterButton)
+  }
+
+
+  
   // call the function that makes an empty line for each letter in the word
   // Replace this line with the function call
 
